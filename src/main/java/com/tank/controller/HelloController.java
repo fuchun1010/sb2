@@ -2,6 +2,7 @@ package com.tank.controller;
 
 
 import lombok.val;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,10 +13,10 @@ import java.util.Map;
 /**
  * @author fuchun
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/hello")
 public class HelloController {
-
 
 
   @GetMapping("")
