@@ -1,5 +1,6 @@
 package com.tank.controller;
 
+import com.tank.exception.ObjectNotFoundException;
 import com.tank.message.Order;
 import com.tank.message.ResultMsg;
 import lombok.extern.slf4j.Slf4j;
@@ -52,12 +53,13 @@ public class OrderController {
   }
 
   @PutMapping("/{id}/update")
-  public ResponseEntity<ResultMsg> update(@PathVariable("id") String sno, @RequestBody Order order) {
+  public ResponseEntity<ResultMsg> update(String sno, @RequestBody Order order) {
     val msg = new ResultMsg();
+    if (Objects.isNull(sno)) {
+      throw new ObjectNotFoundException("order id is:" + sno + " not exists");
+    }
     msg.setMsg("update order id:" + sno + " success");
     return new ResponseEntity(msg, OK);
   }
 
-
-  private final int initCapacity = 16;
 }

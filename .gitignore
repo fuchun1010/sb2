@@ -1,7 +1,6 @@
 .idea/
 target/*
 sb2.iml
-**.idea/**
-
+src/main/resources/trigger.txt
 
 
