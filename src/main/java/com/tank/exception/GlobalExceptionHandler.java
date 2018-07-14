@@ -22,5 +22,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     return msg;
   }
 
+  @ExceptionHandler(JsonFormatException.class)
+  ResultMsg handleJsonFormatException(JsonFormatException ex) {
+    val msg = new ResultMsg();
+    msg.setError(Optional.of(ex.getMessage()));
+    return msg;
+  }
+
 
 }

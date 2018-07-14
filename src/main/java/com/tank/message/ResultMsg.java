@@ -10,9 +10,11 @@ import java.util.Optional;
  */
 @Data
 @Accessors(chain = true)
-public class ResultMsg {
+public class ResultMsg<T> {
 
   private String msg;
 
   private Optional<String> error = Optional.empty();
+
+  private Optional<T> data;
 }

@@ -3,6 +3,7 @@ package com.tank.controller;
 import com.tank.exception.ObjectNotFoundException;
 import com.tank.message.Order;
 import com.tank.message.ResultMsg;
+import com.tank.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,16 @@ public class OrderController {
     this.stringRedisTemplate.opsForValue().set("name", "lisi");
     val response = new ResponseEntity(new ResultMsg().setMsg("init redis success"), OK);
     return response;
+  }
+
+
+  @GetMapping("/json")
+  public ResponseEntity<ResultMsg<String>> userInfo() {
+    val response = new ResultMsg<String>();
+    val order = new Order().setSno("s0007").setAddress("Cq").setReceiver("liubei");
+    val data = JsonUtils.object2Str(order);
+    response.setData(data);
+    return new ResponseEntity(response, OK);
   }
 
   @GetMapping("/list")
