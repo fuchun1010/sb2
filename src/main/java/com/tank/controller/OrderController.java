@@ -21,7 +21,7 @@ import static org.springframework.http.HttpStatus.*;
 @Slf4j
 @CrossOrigin
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/api/v1/order")
 public class OrderController {
 
   @GetMapping("/list")
@@ -53,7 +53,7 @@ public class OrderController {
   }
 
   @PutMapping("/{id}/update")
-  public ResponseEntity<ResultMsg> update(String sno, @RequestBody Order order) {
+  public ResponseEntity<ResultMsg> update(@PathVariable("id") String sno, @RequestBody Order order) {
     val msg = new ResultMsg();
     if (Objects.isNull(sno)) {
       throw new ObjectNotFoundException("order id is:" + sno + " not exists");
