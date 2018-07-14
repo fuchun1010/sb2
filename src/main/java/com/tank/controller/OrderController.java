@@ -5,6 +5,8 @@ import com.tank.message.Order;
 import com.tank.message.ResultMsg;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,12 +26,21 @@ import static org.springframework.http.HttpStatus.*;
 @RequestMapping("/api/v1/order")
 public class OrderController {
 
+
+  @GetMapping
+  public ResponseEntity<ResultMsg> init() {
+    this.stringRedisTemplate.opsForValue().set("name", "lisi");
+    val response = new ResponseEntity(new ResultMsg().setMsg("init redis success"), OK);
+    return response;
+  }
+
   @GetMapping("/list")
-  public List<Order> list() {
+  public ResponseEntity<List<Order>> list() {
     List<Order> orders = new ArrayList<>();
     orders.add(new Order().setSno("s0001").setReceiver("lisi").setAddress("Beijing"));
     orders.add(new Order().setSno("s0002").setReceiver("wangwu").setAddress("Xian"));
-    return orders;
+    val response = new ResponseEntity(orders, OK);
+    return response;
   }
 
   @PostMapping("/create")
@@ -61,5 +72,8 @@ public class OrderController {
     msg.setMsg("update order id:" + sno + " success");
     return new ResponseEntity(msg, OK);
   }
+
+  @Autowired
+  private StringRedisTemplate stringRedisTemplate;
 
 }
