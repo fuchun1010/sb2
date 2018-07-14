@@ -40,7 +40,7 @@ public class OrderController {
   public ResponseEntity<ResultMsg<String>> userInfo() {
     val response = new ResultMsg<String>();
     val order = new Order().setSno("s0007").setAddress("Cq").setReceiver("liubei");
-    val data = JsonUtils.object2Str(order);
+    val data = jsonUtils.object2Str(order);
     response.setData(data);
     return new ResponseEntity(response, OK);
   }
@@ -86,5 +86,8 @@ public class OrderController {
 
   @Autowired
   private StringRedisTemplate stringRedisTemplate;
+
+  @Autowired
+  private JsonUtils jsonUtils;
 
 }
