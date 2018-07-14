@@ -1,6 +1,7 @@
 package com.tank.controller;
 
 
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,19 +14,26 @@ import java.util.Map;
 /**
  * @author fuchun
  */
+@Slf4j
 @CrossOrigin
 @RestController
-@RequestMapping("/hello")
-public class HelloController {
+@RequestMapping("/server")
+public class ServerController {
 
-
-  @GetMapping("")
+  @GetMapping
   public Map<String, String> index() {
     val initCapacity = 16;
     val msg = new HashMap<String, String>(initCapacity);
-    msg.putIfAbsent("name", "hello");
+    val serverConfig = Runtime.getRuntime();
+    val cpuCores = serverConfig.availableProcessors();
+    val memory = serverConfig.totalMemory() / M;
+    val remainingMemory = serverConfig.freeMemory() / M;
+    msg.putIfAbsent("cpu cores:", String.valueOf(cpuCores));
+    msg.putIfAbsent("jvm total memory:", memory + "M");
+    msg.putIfAbsent("jvm remaining memory", remainingMemory + "M");
     return msg;
   }
 
+  private final long M = 1024 * 1024;
 
 }
