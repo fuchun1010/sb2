@@ -1,6 +1,6 @@
 package com.tank.controller;
 
-import com.tank.AsyncQueue;
+import com.tank.utils.AsyncQueue;
 import com.tank.message.User;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;

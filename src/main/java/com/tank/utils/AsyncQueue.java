@@ -1,4 +1,4 @@
-package com.tank;
+package com.tank.utils;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -20,9 +20,8 @@ public class AsyncQueue<T> {
   public void process() {
     for (; ; ) {
       try {
-        System.out.println("prepare process queue data");
+        System.out.println("....prepare process queue data....");
         T data = queue.take();
-        System.out.println("done one queue data");
         System.out.println("data type is:" + data.getClass().getSimpleName());
       } catch (InterruptedException e) {
         e.printStackTrace();
