@@ -1,9 +1,12 @@
 package com.tank;
 
+import lombok.val;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+
+import java.util.Objects;
 
 /**
  * @author fuchun
@@ -13,6 +16,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAsync
 public class Boot {
   public static void main(String[] args) {
-    SpringApplication.run(Boot.class, args);
+    val context = SpringApplication.run(Boot.class, args);
+    AsyncQueue queue = (AsyncQueue)context.getBean("asyncQueue");
+    if(!Objects.isNull(queue)) {
+      queue.process();
+    }
   }
 }
