@@ -2,6 +2,8 @@ server:
   port: 6001
 
 spring:
+#  profiles:
+#    active:
   devtools:
     restart:
       trigger-file: trigger.txt
@@ -18,3 +20,4 @@ spring:
 
 switch:
   scheduleSwitcher: false
+
