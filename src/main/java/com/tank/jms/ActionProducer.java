@@ -9,6 +9,10 @@ import lombok.NonNull;
  */
 public interface ActionProducer<T> {
 
+  /**
+   * 添加一个消息
+   * @param data
+   */
   void add(@NonNull T data);
 
 }
